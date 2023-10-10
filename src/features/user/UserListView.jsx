@@ -82,7 +82,7 @@ export default function UserListView() {
 							</tr>
 						</thead>
 						<tbody>
-							{user.users.map((user) => (
+							{users.map((user) => (
 								<tr key={user.id}>
 									<td>{user.id}</td>
 									<td>
