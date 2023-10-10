@@ -18,7 +18,7 @@ export default function TodoListView() {
 
 	return (
 		<>
-			<Container>
+			<Container className='mt-4'>
 				<h2>Todos: </h2>
 				<Col>
 					<Table striped hover>
@@ -47,6 +47,8 @@ export default function TodoListView() {
 						</tbody>
 					</Table>
 				</Col>
+			</Container>
+			<Container className='mt-4'>
 				<h2>Completed todos:</h2>
 				<Col>
 					<Table striped hover>
