@@ -1,10 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { get } from "lodash";
+import _ from "lodash";
 
 const initialState = {
 	loading: false,
 	users: [],
+	numOfUsers: 0,
+	order: "asc",
 	error: "",
 };
 
@@ -14,16 +16,13 @@ export const fetchUsers = createAsyncThunk("user/fetchUsers", () => {
 		.then((response) => response.data);
 });
 
-export function sortByName(users) {
-	return users.sort();
-}
-
 const userSlice = createSlice({
 	name: "user",
 	initialState,
 	reducers: {
-		sortByName(state) {
-			state.users = state.users.sort();
+		sortBy(state, action) {
+			state.order = state.order !== "asc" ? "asc" : "desc";
+			state.users = _.orderBy(state.users, action.payload.value, state.order);
 		},
 	},
 	extraReducers: (builder) => {
@@ -34,6 +33,7 @@ const userSlice = createSlice({
 		builder.addCase(fetchUsers.fulfilled, (state, action) => {
 			state.loading = false;
 			state.users = action.payload;
+			state.numOfUsers = action.payload.length;
 			state.error = "";
 		});
 
@@ -46,3 +46,4 @@ const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
+export const { sortBy } = userSlice.actions;

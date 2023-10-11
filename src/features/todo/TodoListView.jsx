@@ -6,9 +6,10 @@ import "./TodoListView.css";
 import { useLocation, useParams } from "react-router-dom";
 
 export default function TodoListView() {
-	const todo = useSelector((state) => state.todo);
+	const todos = useSelector((state) => state.todo.todos);
+	const completedTodos = useSelector((state) => state.todo.numOfCompletedTodos);
+	const uncompletedTodos = useSelector((state) => state.todo.numOfUncompletedTodos);
 	const params = useParams();
-	console.log(params.userId);
 
 	const dispatch = useDispatch();
 
@@ -19,7 +20,7 @@ export default function TodoListView() {
 	return (
 		<>
 			<Container className='mt-4'>
-				<h2>Todos: </h2>
+				<h2>Todos: {uncompletedTodos}</h2>
 				<Col>
 					<Table striped hover>
 						<thead>
@@ -29,7 +30,7 @@ export default function TodoListView() {
 							</tr>
 						</thead>
 						<tbody>
-							{todo.todos.map((todo) => {
+							{todos.map((todo) => {
 								if (!todo.completed) {
 									return (
 										<tr key={todo.id}>
@@ -49,7 +50,7 @@ export default function TodoListView() {
 				</Col>
 			</Container>
 			<Container className='mt-4'>
-				<h2>Completed todos:</h2>
+				<h2>Completed todos: {completedTodos}</h2>
 				<Col>
 					<Table striped hover>
 						<thead>
@@ -59,7 +60,7 @@ export default function TodoListView() {
 							</tr>
 						</thead>
 						<tbody>
-							{todo.todos.map((todo) => {
+							{todos.map((todo) => {
 								if (todo.completed) {
 									return (
 										<tr key={todo.id}>

@@ -4,6 +4,8 @@ import axios from "axios";
 const initialState = {
 	loading: false,
 	todos: [],
+	numOfCompletedTodos: 0,
+	numOfUncompletedTodos: 0,
 	error: "",
 };
 
@@ -16,6 +18,7 @@ export const fetchTodos = createAsyncThunk("todo/fetchTodos", (id) => {
 const todoSlice = createSlice({
 	name: "todo",
 	initialState,
+	reducers: {},
 	extraReducers: (builder) => {
 		builder.addCase(fetchTodos.pending, (state) => {
 			state.loading = true;
@@ -24,6 +27,8 @@ const todoSlice = createSlice({
 		builder.addCase(fetchTodos.fulfilled, (state, action) => {
 			state.loading = false;
 			state.todos = action.payload;
+			state.numOfCompletedTodos = state.todos.filter((todo) => todo.completed).length;
+			state.numOfUncompletedTodos = state.todos.filter((todo) => !todo.completed).length;
 			state.error = "";
 		});
 
