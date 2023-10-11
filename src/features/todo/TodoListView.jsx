@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTodos } from "./todoSlice";
-import "./TodoListView.css";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import TodoListTable from "./TodoListTable";
 
 export default function TodoListView() {

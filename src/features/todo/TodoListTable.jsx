@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { Container, Col, Table } from "react-bootstrap";
 import { toggleCompleteness } from "./todoSlice";
+import "./styles.css";
 
 export default function TodoListTable({ todos, numOfTodos }) {
 	const dispatch = useDispatch();
@@ -10,7 +11,7 @@ export default function TodoListTable({ todos, numOfTodos }) {
 			<Container className='mt-4'>
 				<h2>Todos: {numOfTodos}</h2>
 				<Col>
-					<Table striped hover>
+					<Table striped hover bordered id='todoTable'>
 						<thead>
 							<tr>
 								<th>#</th>

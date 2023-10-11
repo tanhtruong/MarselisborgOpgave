@@ -1,0 +1,8 @@
+#usersTable th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background: #04aa6d;
+	color: white;
+	cursor: pointer;
+}

@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers, sortBy } from "./userSlice";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Table from "react-bootstrap/Table";
 import { Link } from "react-router-dom";
+import "./styles.css";
 
 export default function UserListView() {
 	const users = useSelector((state) => state.user.users);
@@ -20,7 +21,7 @@ export default function UserListView() {
 			<Container className='mt-4'>
 				<h2>List of users: {numOfUsers} </h2>
 				<Col>
-					<Table striped hover>
+					<Table striped hover bordered id='usersTable'>
 						<thead>
 							<tr>
 								<th onClick={() => dispatch(sortBy({ value: "id" }))}>#</th>
