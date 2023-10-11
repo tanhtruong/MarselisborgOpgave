@@ -18,7 +18,17 @@ export const fetchTodos = createAsyncThunk("todo/fetchTodos", (id) => {
 const todoSlice = createSlice({
 	name: "todo",
 	initialState,
-	reducers: {},
+	reducers: {
+		toggleCompleteness: (state, action) => {
+			state.todos = state.todos.map((todo) =>
+				todo.id === action.payload["id"] ? { ...todo, completed: !todo.completed } : todo
+			);
+			state.numOfCompletedTodos = state.todos.filter((todo) => todo.completed).length;
+			state.numOfUncompletedTodos = state.todos.filter((todo) => !todo.completed).length;
+
+			console.log("Clicked", action.payload);
+		},
+	},
 	extraReducers: (builder) => {
 		builder.addCase(fetchTodos.pending, (state) => {
 			state.loading = true;
@@ -41,3 +51,4 @@ const todoSlice = createSlice({
 });
 
 export default todoSlice.reducer;
+export const { toggleCompleteness } = todoSlice.actions;

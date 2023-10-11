@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchTodos } from "./todoSlice";
+import { fetchTodos, toggleCompleteness } from "./todoSlice";
 import { Container, Col, Table } from "react-bootstrap";
 import "./TodoListView.css";
 import { useLocation, useParams } from "react-router-dom";
@@ -38,6 +38,9 @@ export default function TodoListView() {
 											<td
 												className={
 													todo.completed === true ? "completed" : ""
+												}
+												onClick={() =>
+													dispatch(toggleCompleteness({ id: todo.id }))
 												}>
 												{todo.title}
 											</td>
@@ -68,6 +71,9 @@ export default function TodoListView() {
 											<td
 												className={
 													todo.completed === true ? "completed" : ""
+												}
+												onClick={() =>
+													dispatch(toggleCompleteness({ id: todo.id }))
 												}>
 												{todo.title}
 											</td>

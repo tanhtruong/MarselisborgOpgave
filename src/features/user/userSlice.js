@@ -20,7 +20,7 @@ const userSlice = createSlice({
 	name: "user",
 	initialState,
 	reducers: {
-		sortBy(state, action) {
+		sortBy: (state, action) => {
 			state.order = state.order !== "asc" ? "asc" : "desc";
 			state.users = _.orderBy(state.users, action.payload.value, state.order);
 		},
